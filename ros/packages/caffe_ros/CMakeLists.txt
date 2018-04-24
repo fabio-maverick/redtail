@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.1)
 project(caffe_ros)
 
+## add_definitions(-DCPU_ONLY=1)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
@@ -45,7 +46,7 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 
 set(
   CUDA_NVCC_FLAGS
-  ${CUDA_NVCC_FLAGS}; 
+  ${CUDA_NVCC_FLAGS};
     -O3 -gencode arch=compute_53,code=sm_53
 )
 
@@ -123,7 +124,7 @@ target_link_libraries(caffe_ros_node
 if(CATKIN_ENABLE_TESTING)
   find_package(rostest REQUIRED)
   add_rostest_gtest(${PROJECT_NAME}_tests tests/tests_basic.launch tests/tests.cpp)
-  target_link_libraries(${PROJECT_NAME}_tests 
+  target_link_libraries(${PROJECT_NAME}_tests
     ${catkin_LIBRARIES}
     opencv_core
     opencv_imgproc
