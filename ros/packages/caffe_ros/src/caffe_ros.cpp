@@ -33,7 +33,8 @@ CaffeRos::CaffeRos()
     int         dnn_queue_size;
     bool        use_cached_model;
 
-    nh.param<std::string>("camera_topic",  camera_topic, "/camera/image_raw");
+    //nh.param<std::string>("camera_topic",  camera_topic, "/camera/image_raw");
+    nh.param<std::string>("camera_topic",  camera_topic, "/raspicam_node/image/compressed");
     nh.param<std::string>("prototxt_path", prototxt_path, "");
     nh.param<std::string>("model_path",    model_path, "");
     nh.param<std::string>("input_layer",   input_layer, "data");
@@ -43,7 +44,7 @@ CaffeRos::CaffeRos()
     nh.param<std::string>("data_type",     data_type_s, "fp16");
     nh.param<std::string>("int8_calib_src",   int8_calib_src,   "");
     nh.param<std::string>("int8_calib_cache", int8_calib_cache, "");
-    
+
     // Backward compatibility: (use_FP16 == false) means use FP32.
     nh.param("use_fp16",  use_FP16, true);
     data_type_s = use_FP16 ? data_type_s : "fp32";
